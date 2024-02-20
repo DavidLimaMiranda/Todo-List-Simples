@@ -17,10 +17,10 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
+    @Column(name= "id", unique = true)
     private Long id;
 
-    @Column(length = 80, nullable = false)
+    @Column(name = "users_name", length = 80, nullable = false)
     @Size(min = 2)
     private String userName;
 
@@ -28,7 +28,8 @@ public class User {
     @Size(min = 8)
     private String password;
 
-    // private List<Task> tasks = new ArrayList<Task>()
+    @OneToMany(mappedBy = "users")
+    private List<Task> tasks = new ArrayList<Task>();
 
 
     public User(Long id, String userName, String password) {
@@ -41,12 +42,12 @@ public class User {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
 
-        if (o == null || getClass() != o.getClass()) return false;
+        if (obj == null || getClass() != obj.getClass()) return false;
 
-        User user = (User) o;
+        User user = (User) obj;
         return Objects.equals(id, user.id) && Objects.equals(userName, user.userName) && Objects.equals(password, user.password);
     }
 
