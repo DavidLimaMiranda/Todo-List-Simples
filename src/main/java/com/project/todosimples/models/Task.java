@@ -1,6 +1,8 @@
 package com.project.todosimples.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,11 +21,13 @@ public class Task {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, updatable = false)
+    @JoinColumn(name = "users_id", nullable = false, updatable = false)
+    @NotNull
     private User users;
 
     @Column(name = "description", length = 255, nullable = false)
     @Size(min = 2, max = 255)
+    @NotBlank
     private String description;
 
     public Task() {
